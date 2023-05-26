@@ -3,16 +3,21 @@ import { scene, animate } from "./scene";
 import Lights from "./lights";
 
 const geo_elements = new CommonGeometryElements(scene)
-const ligths = new Lights(scene, true)
+const lights = new Lights(scene, true)
+geo_elements.floor()
 
-const baixo = geo_elements.cube("red", 2, 1, 1, 1.5)
-baixo.position.x = 1.5
+const cilindro = geo_elements.cylinder("white")
+cilindro.position.y = 1
 
-const lado = geo_elements.cube("lime", 1, 4)
-lado.position.x = 0
-lado.position.y = 1.5
+export const bola = geo_elements.sphere()
+bola.position.x = 3
+bola.position.y = 1
 
-ligths.directional()
+lights.ambient()
+lights.point("red", 5, 50, 0, 1, -5)
+lights.point("purple", 50, 10, 5, 1, 0)
+lights.point("lime", 5, 10, -5, 1, 0)
+lights.point("cyan", 5, 50, 0, 1, 5)
 
 animate()
 

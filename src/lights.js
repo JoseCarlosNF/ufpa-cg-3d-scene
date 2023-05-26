@@ -6,7 +6,7 @@ export default class Lights {
     this.debug = debug
   }
 
-  ambient(color="red", intensity=1) {
+  ambient(color="black", intensity=1) {
     const light = new THREE.AmbientLight(color, intensity);
     this.scene.add(light);
   }
@@ -30,6 +30,16 @@ export default class Lights {
     this.scene.add(light)
     this.scene.add(light.target)
     const lightsHelpers = new THREE.SpotLightHelper(light);
+    this.debug ? this.scene.add(lightsHelpers) : null
+  }
+
+  point(color="lime", intensity=1, dist=12, x=0, y=0, z=0) {
+    const light = new THREE.PointLight(color, intensity, dist);
+    light.position.set(x, y, z);
+    light.castShadow = true;
+    this.scene.add(light)
+    this.scene.add(light.target)
+    const lightsHelpers = new THREE.PointLightHelper(light);
     this.debug ? this.scene.add(lightsHelpers) : null
   }
 }
