@@ -1,9 +1,25 @@
 import * as THREE from 'three';
 
 const loader = new THREE.TextureLoader
-const sand_texture = loader.load("GroundSand006_Floor.png")
 const basket_court_texture = loader.load("basket_court.png")
 const basketball_texture = loader.load("balldimpled.png")
+const basketball_normal = loader.load("balldimpled_normal.png")
+
+const texture_disco_ball_base = loader.load("Discoball_mat_BaseColor.jpg")
+const texture_disco_ball_normal = loader.load("Discoball_mat_Normal.png")
+const texture_disco_ball_roughness = loader.load("Discoball_mat_Roughness.jpg")
+const texture_disco_ball_envmap = loader.load("disco_envmap.png")
+
+// // Shadow Round
+// const shadow_round = loader.load("roundshadow.png")
+// const shadowMat = new THREE.MeshBasicMaterial({
+//     map: shadow_round,
+//     transparent: true,
+//     depthWrite: false,
+//   })
+// const shadowGeo = (size=1) => new THREE.PlaneGeometry(size, size);
+// const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat)
+
 
 export default class CommonGeometryElements {
   constructor(scene, helper) {
@@ -27,18 +43,48 @@ export default class CommonGeometryElements {
     return cube
   }
 
-  sphere(color="orange", radius=1, widthSegments=20, heightSegments=20) {
-    const material = new THREE.MeshLambertMaterial({color: color, map: basketball_texture})
-    const geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments)
+  disco_ball() {
+    const material = new THREE.MeshStandardMaterial(
+      {
+        color: "grey",
+        flatShading: true,
+        map: texture_disco_ball_base,
+        normalMap: texture_disco_ball_normal,
+        envMap: texture_disco_ball_envmap,
+        envMapIntensity: 1,
+        roughness: 1,
+        metalness: 1,
+        roughnessMap: texture_disco_ball_roughness,
+      }
+    )
+    const geometry = new THREE.SphereGeometry()
     const sphere = new THREE.Mesh(geometry, material)
+    sphere.castShadow = true
+    sphere.receiveShadow = true
+    this.scene.add(sphere)
+    return sphere
+  }
+
+  bastket_ball() {
+    const material = new THREE.MeshStandardMaterial(
+      {
+        map: basketball_texture,
+        normalMap: basketball_normal
+      }
+    )
+    const geometry = new THREE.SphereGeometry()
+    const sphere = new THREE.Mesh(geometry, material)
+    sphere.castShadow = true
+    sphere.receiveShadow = true
     this.scene.add(sphere)
     return sphere
   }
 
   floor(width=93, height=50) {
-    const material = new THREE.MeshLambertMaterial({color: "white", map: basket_court_texture})
+    const material = new THREE.MeshStandardMaterial({color: "white", map: basket_court_texture, side: THREE.DoubleSide})
     const geometry = new THREE.PlaneGeometry(width, height)
     const floor = new THREE.Mesh(geometry, material)
+    floor.receiveShadow = true
     floor.rotation.x = -Math.PI / 2
     this.scene.add(floor)
     return floor
