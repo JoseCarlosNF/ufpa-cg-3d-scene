@@ -6,12 +6,12 @@ export default class Lights {
     this.debug = debug
   }
 
-  ambient(color="black", intensity=1) {
+  ambient(color="#000", intensity=1) {
     const light = new THREE.AmbientLight(color, intensity);
     this.scene.add(light);
   }
 
-  directional(color="cyan", intensity=1, x=0, y=0, z=0) {
+  directional(color="#FFF", intensity=1, x=0, y=0, z=0) {
     const light = new THREE.DirectionalLight(color, intensity);
     light.position.set(x, y, z)
     light.target.position.set(0, 0, 0)
@@ -22,7 +22,7 @@ export default class Lights {
     this.debug ? this.scene.add(lightsHelpers) : null
   }
 
-  spot(color="purple", intensity=1, x=0, y=0, z=0) {
+  spot(color="#FFBF00", intensity=1, x=0, y=0, z=0) {
     const light = new THREE.SpotLight(color, intensity);
     light.position.set(x, y, z);
     light.target.position.set(0, 0, 0);
@@ -33,7 +33,7 @@ export default class Lights {
     this.debug ? this.scene.add(lightsHelpers) : null
   }
 
-  point(color="lime", intensity=1, dist=12, x=0, y=0, z=0) {
+  point(color="#FFBF00", intensity=1, dist=12, x=0, y=0, z=0) {
     const light = new THREE.PointLight(color, intensity, dist);
     light.position.set(x, y, z);
     light.castShadow = true;
