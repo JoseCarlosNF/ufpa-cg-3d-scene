@@ -3,17 +3,22 @@ import { scene, animate } from "./scene";
 import Lights from "./lights";
 
 const geo_elements = new CommonGeometryElements(scene)
-const lights = new Lights(scene, true)
 geo_elements.floor()
 
 export const bola = geo_elements.sphere()
 bola.position.x = 3
 bola.position.y = 1
 
-lights.ambient()
-lights.point("red", 5, 50, 0, 1, -5)
-lights.point("purple", 50, 10, 5, 1, 0)
-lights.point("lime", 5, 10, -5, 1, 0)
-lights.point("cyan", 5, 50, 0, 1, 5)
 
+// --------------------------------- Lights ------------------------------------
+const lights = new Lights(scene, true)
+lights.ambient()
+
+const spot1 = lights.spot("lime", {x: -30, y:10, z: 0}, {x: -30, y: 0, z: 0})
+const spot2 = lights.spot("purple", {x: -15, y:10, z: 0}, {x: -15, y: 0, z: 0})
+const spot3 = lights.spot("red", {x: 15, y:10, z: 0}, {x: 15, y: 0, z: 0})
+const spot4 = lights.spot("cyan", {x: 30, y:10, z: 0}, {x: 30, y: 0, z: 0})
+const spots = [ [spot1, spot2], [spot3, spot4] ]
+
+// ------------------------------- Main run ----------------------------------
 animate()
