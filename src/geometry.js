@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 const loader = new THREE.TextureLoader
-const sand_texture = loader.load("GroundSand006_Floor.png")
 const basket_court_texture = loader.load("basket_court.png")
 const basketball_texture = loader.load("balldimpled.png")
 
