@@ -24,3 +24,20 @@ padrões da biblioteca.
 ## Ilustração de solução
 
 ![image](https://github.com/JoseCarlosNF/ufpa-cg-3d-scene/assets/38339200/583d1537-85f1-403d-a906-7769adf4502a)
+
+
+## Como rodar o projeto
+
+O projeto é executado a sobre o [vite](https://vitejs.dev/), plataforma de desenvolvimento javascript.
+
+Instale as dependências:
+
+```
+yarn install
+```
+
+Inicialize o projeto:
+
+```
+yarn dev
+```
