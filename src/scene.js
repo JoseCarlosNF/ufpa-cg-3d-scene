@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-import {bola} from './main'
+import {bola, spots} from './main'
+import * as dat from 'dat.gui'
 
 // Main scene definitions
 export const scene = new THREE.Scene();
@@ -12,6 +13,7 @@ const renderer = new THREE.WebGLRenderer({antialias: true});
 
 // Enable/Disable DEBUG
 const helpers = true
+const gui = new dat.GUI()
 
 // Renderer oprtions
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -29,7 +31,7 @@ helpers ? scene.add(axesHelper) : null
 // Every reload to load new scene after camera chage
 let t = 0
 export const animate = () => {
-  requestAnimationFrame(animate);
+  window.requestAnimationFrame(animate);
 
   // Realistic ball roll
   t += 0.07 // velocity of moviment
@@ -44,6 +46,31 @@ export const animate = () => {
 
   // Jump ball
   bola.position.y = 2+1*Math.cos(t*2)
+
+
+  // Volumetric spotlights
+  spots[0].forEach(spot => {
+    spot[0].target.position.set(
+      spot[0].target.position.x+Math.sin(0.5*t),
+      spot[0].target.position.y,
+      spot[0].target.position.z+Math.cos(0.5*t)
+    )
+    spot[0].target.updateMatrixWorld()
+    spot[1].rotateX(-0.07)
+    spot[1].rotateZ(0.07)
+  })
+
+
+  spots[1].forEach(spot => {
+    spot[0].target.position.set(
+      spot[0].target.position.x+-Math.sin(0.5*t),
+      spot[0].target.position.y,
+      spot[0].target.position.z+Math.cos(0.5*t)
+    )
+    spot[0].target.updateMatrixWorld()
+    spot[1].rotateX(-0.07)
+    spot[1].rotateZ(-0.07)
+  })
 
   renderer.render(scene, camera);
 }
