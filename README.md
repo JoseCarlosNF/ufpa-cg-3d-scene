@@ -23,7 +23,7 @@ padrões da biblioteca.
 
 ## Ilustração de solução
 
-![image](https://github.com/JoseCarlosNF/ufpa-cg-3d-scene/assets/38339200/583d1537-85f1-403d-a906-7769adf4502a)
+![image](https://github.com/JoseCarlosNF/ufpa-cg-3d-scene/assets/38339200/18a8b28c-4eab-4b4f-9e77-1673adfb9723)
 
 
 ## Como rodar o projeto
